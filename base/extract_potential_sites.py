@@ -1,5 +1,7 @@
 import numpy as np
 from base.pdb_loader import load_pdb
+from base.mmcif_loader import load_mmcif
+
 import torch
 from base.preprocess import get_distances
 from base.features import get_features_from_aminoacid
@@ -80,7 +82,14 @@ def check_validity(subgroup, matrix):   # checks whether all residues in the sub
 
 def new_load_potential_sites(pdb_file, aminoacids, chain=None):
     prot_name = pathlib.Path(pdb_file).name.split('.')[0]
-    pdb_df = load_pdb(pdb_file)
+
+    if pdb_file.endswith(".pdb"):
+        print("is a pdb")
+        pdb_df = load_pdb(pdb_file)
+
+    elif pdb_file.endswith(".cif"):
+        print("is a cif")
+        pdb_df = load_mmcif(pdb_file)
 
     if chain!= None:
         pdb_df = pdb_df[pdb_df['chain_id']==chain]
