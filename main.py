@@ -65,12 +65,8 @@ def Main(args):
 
     print(trainingset_list)
 
-    #trainingset_list = 'trainingset_zinc.txt'
-    #trainingset_dir = pathlib.Path('/mnt/disk4Tb/Vincenzo/data/site_files')
+    trainingset_dir = pathlib.Path(trainingset_dir)
     configs.SITES_PATH = trainingset_dir
-
-    #to_predict_list = 'alphafold_structs.txt'
-    #to_predict_dir = '/mnt/disk4Tb/milazzo/alphafold_staph'
 
     # OUTPUT PATH
     pathlib.Path("output").mkdir(parents=True, exist_ok=True)
