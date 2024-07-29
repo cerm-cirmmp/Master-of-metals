@@ -3,6 +3,7 @@ import torch
 from base.pdb_loader import load_pdb
 import numpy as np
 from base.features import process_features
+from base.preprocess import get_distances
 
 class MetalBindingSite:
 
@@ -32,7 +33,13 @@ class MetalBindingSite:
             #self.adj, self.x = self._load_site(site_path)
             self.adj, self.x, self.sequence, self.coord_CA, self.coord_CB, self.metals = self._load_site2(site_path, soglia, debug)
 
-        self.real_adj = 15*torch.log(self.adj)
+        if isinstance(self.coord_CA, np.ndarray):
+            self.coord_CA = torch.from_numpy(self.coord_CA)
+            self.coord_CB = torch.from_numpy(self.coord_CB)
+
+        #self.real_adj = 15*torch.log(self.adj)
+        CACB = torch.cat((self.coord_CA, self.coord_CB), dim=0)
+        self.real_adj = get_distances(CACB, CACB)
 
 
     def get_aa_sequence(self):
