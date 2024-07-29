@@ -58,7 +58,7 @@ args = parser.parse_args()
 def Main(args):
 
     trainingset_list = args.trainingset_list # 'trainingset_zinc.txt'
-    trainingset_dir = args.training_set_dir #  "/mnt/disk4Tb/Vincenzo/data/site_files"
+    trainingset_dir = args.trainingset_dir #  "/mnt/disk4Tb/Vincenzo/data/site_files"
 
     to_predict_list = args.to_predict_list # 'alphafold_structs.txt'
     to_predict_dir = args.to_predict_dir # '/mnt/disk4Tb/milazzo/alphafold_staph'
