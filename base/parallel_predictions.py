@@ -252,7 +252,7 @@ def mbs_search(net, pdb_path, file_list, output_directory, training_mbs_list, aa
                 else:
                     closest_dist = 1000
 
-                if closest_dist < 0.3:  # this is the rmsd threshold
+                if closest_dist < 0.35:  # this is the rmsd threshold
                     pot_coord_ca_cb = np.concatenate((potential_mbs.coord_CA, potential_mbs.coord_CB), axis=0)
                     ordered_coord = pot_coord_ca_cb[coord_idxs]  # potential mbs coordinates ordered according to best permutation
                     known_coord_ca_cb = np.concatenate((closest_real_mbs.coord_CA, closest_real_mbs.coord_CB), axis=0)
