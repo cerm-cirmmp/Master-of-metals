@@ -34,7 +34,7 @@ with open('trainingset_zinc.txt', 'w') as fp:
 parser = argparse.ArgumentParser(description="MasterOfMetals")
 
 parser.add_argument(
-    "--training_set_dir",
+    "--trainingset_dir",
     help="The path of the directory containing the known MBSs, downloaded from metalPDB")
 
 parser.add_argument(
