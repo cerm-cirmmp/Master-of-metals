@@ -87,7 +87,8 @@ def matrix_rmsd_parallel(matrix1, matrix2, lista_siti, input_pdb, tensor_pattern
     assert len(training_matrix) == len(lista_siti)
 
     # permutation combiantions
-    l = list(permutations(range(int((len(matrix1)) / 2))))
+    #l = list(permutations(range(int((len(matrix1)) / 2))))
+    l = [list(range(int((len(matrix1)) / 2)))] # NO PERMUTATIONS FOR NOW
 
     # name list of the training pdbs
     protein_names = [x.protein for x in lista_siti]
@@ -108,10 +109,13 @@ def matrix_rmsd_parallel(matrix1, matrix2, lista_siti, input_pdb, tensor_pattern
         cacb_idxs = permutation + cb_idxs
         test_matrix[list(range(len(test_matrix))), :] = test_matrix[cacb_idxs, :]  # exchanging rows
         test_matrix[:, list(range(len(test_matrix)))] = test_matrix[:, cacb_idxs]  # exchanging columns
-        diff = (test_matrix-training_matrix)**2
+        
+        #diff = (test_matrix-training_matrix)**2
+        #ave = np.mean(diff.reshape((training_matrix.shape[0], -1)), axis=1)
+        #rmsd = np.sqrt(ave)
 
-        ave = np.mean(diff.reshape((training_matrix.shape[0], -1)), axis=1)
-        rmsd = np.sqrt(ave)
+        diff = np.abs(test_matrix-training_matrix)
+        rmsd = np.mean(diff.reshape((training_matrix.shape[0], -1)), axis=1)
 
         #print("rmsd", rmsd)
 
